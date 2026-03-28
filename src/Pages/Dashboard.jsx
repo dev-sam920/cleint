@@ -187,7 +187,7 @@ export default function Dashboard() {
     }
 
     try {
-      // Create FormData for file upload
+      
       const formData = new FormData();
       formData.append('title', title);
       formData.append('description', newTask.description.trim());
@@ -195,7 +195,7 @@ export default function Dashboard() {
       formData.append('priority', newTask.priority);
       formData.append('category', newTask.category.trim() || 'General');
 
-      // If we have a file (from file input), append it
+      
       if (newTask.image && newTask.image.startsWith('data:image')) {
         // Convert base64 to blob for upload
         const response = await fetch(newTask.image);
@@ -207,9 +207,9 @@ export default function Dashboard() {
       const res = await fetch(`${API_BASE}/tasks`, {
         method: 'POST',
         headers: {
-          Authorization: headers.Authorization // Keep auth header
+          Authorization: headers.Authorization 
         },
-        body: formData // Use FormData instead of JSON
+        body: formData 
       });
 
       if (!res.ok) {
@@ -223,7 +223,7 @@ export default function Dashboard() {
       setShowModal(false);
     } catch (error) {
       console.error('Create task error:', error);
-      // Fallback: try with JSON if FormData fails
+      
       try {
         const fallbackRes = await fetch(`${API_BASE}/tasks`, {
           method: 'POST',
@@ -249,7 +249,7 @@ export default function Dashboard() {
         console.error('Fallback create error:', fallbackError);
       }
 
-      // If both fail, show error
+     
       alert('Failed to create task. Please try again.');
     }
   };
